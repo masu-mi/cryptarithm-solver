@@ -4,7 +4,7 @@
 #   [VERSION=v3] [REGISTRY="gcr.io"] make build
 VERSION?=develop
 REGISTRY?=docker.io
-IMAGE_NAME?=example-py-fastapi
+IMAGE_NAME?=masumi/cryptarithm-solver
 DOCKERFILE?=Dockerfile
 
 release: clean build push
@@ -17,8 +17,10 @@ build:
 		.
 
 # push the image to an registry
+update_latest:
+	docker tag ${REGISTRY}/${IMAGE_NAME}:${VERSION} ${REGISTRY}/${IMAGE_NAME}:latest
 push:
-	gcloud docker -- push ${REGISTRY}/${IMAGE_NAME}:${VERSION}
+	docker push ${REGISTRY}/${IMAGE_NAME}:${VERSION}
 
 # remove previous images and containers
 clean:
