@@ -4,7 +4,7 @@ COPY . /app
 WORKDIR /app
 
 RUN pip install --upgrade pip && pip install pipenv
-RUN pipenv lock -r | pip install -r /dev/stdin
+RUN pipenv install --system
 
 
 FROM python:3.8
